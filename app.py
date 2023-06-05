@@ -19,23 +19,54 @@ def index():
     if(opt == 1):
         login_obj.login()
 
-    if(opt == 2):
-        if(login_obj.register() == 1):
-            print(colored(" (+) User Created Successfully (+) " , "green"))
+    elif(opt == 2):
+        regAcc = 0
+         
+        while(regAcc != 1):
+            regAcc =  register()
         
-        elif(login_obj.register() == -1):
-            print(colored(" (-) Incorrect Password !!! Please Try Again (-)" , "red"))
-        
-        else:
-            print(colored(" (-) Some Internal Error Occurred (-)" , "red"))
     else:
         print(colored(" (-) Invalid Choice (-) " , "red"))
         os.system("pause")
         index()
 
-def register():
-    
-    login_obj.registration()
 
+def register():
+    accountCreate = login_obj.registration()
+
+    if(accountCreate == 1):
+        print(colored(" (+) User Created Successfully (+) " , "green"))
+        os.system("pause")
+        return 1
+        
+    elif(accountCreate == 0):
+        print(colored(" (-) Email Already Exists (-)" , "red"))
+    
+    elif(login_obj.registration == -1):
+        print(colored(" (-) Password Does Not Match (-)" , "red"))
+    
+    else:
+        print(colored(" (-) Some Internal Error Occurred (-)" , "red"))
+
+    os.system("pause")
+    return 0
+
+
+def login():
+    auth = login_obj.login()
+    if(auth == 1):
+        print(colored(" (+) Logged In Successfully (+)" , "green"))
+        os.system("pause")
+        return 1
+        
+    elif(auth == 0):
+        print(colored(" (-) Incorrect Username/Password (-)" , "red"))
+        
+    
+    else:
+        print(colored(" (-) Some Error Occured (-)" , "red"))
+
+    os.system("pause")
+    return 0
 
 index()
